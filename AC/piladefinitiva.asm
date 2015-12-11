@@ -44,12 +44,14 @@ create:
 	sw $fp, 16($sp)
 	addiu $fp, $sp, 28
 	sw $a0, 0($fp)
+	sw $a1, -4($fp)
 	
 	li $a0, 8
 	li $v0,9
 	syscall
 	
 	lw $a0, 0($fp)
+	lw $a1, -4($fp)
 	sw $a0, 0($v0) #valor
 	sw $a1, 4($v0) #puntero
 	
@@ -65,7 +67,6 @@ push:
 	sw $a0, 0($fp)
 	sw $a1, -4($fp) #guardo el nuevo en la pila
 	
-	#move $a0,$a1
 	lw $a0, -4($fp)#nuevo a a0
 	li $a1, 0 #inicializo a cero para llamar a create
 	jal create
